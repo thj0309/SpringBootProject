@@ -128,7 +128,28 @@
 		GROUP BY SUBSTR(C.TRANDATE, 1, 4), A.STOREMGTCD, A.STOREMGTNM
 		ORDER BY SUBSTR(C.TRANDATE, 1, 4), SUM(C.CHARGE-C.COMMISSION) DESC
  	</select>
-
+ 	
+ 	<select id="selectQuestion03_JUnit" parameterType="HashMap" resultType="HashMap">
+ 		SELECT /* [KakaoMapper.xml][selectQuestion03_JUnit] */		
+ 			ROWNUM AS RNUM
+ 			, T.*
+		FROM
+		(
+		SELECT 
+		A.STOREMGTCD
+					, A.STOREMGTNM
+					, SUM(C.CHARGE-C.COMMISSION) AS SUMAMT
+					, SUBSTR(C.TRANDATE, 1, 4) AS TRANYEAR
+				FROM (SELECT DISTINCT STOREMGTCD, STOREMGTNM FROM TB_STOREMGT) A
+		  INNER JOIN TB_ACCOUNTINFO B 	ON B.STOREMGTCD = A.STOREMGTCD
+		  INNER JOIN TB_TRANPRSTS C 	ON C.ACCOUNTNB = B.ACCOUNTNB AND C.CANCLEYN = 'N'
+				WHERE 1=1
+				GROUP BY SUBSTR(C.TRANDATE, 1, 4), A.STOREMGTCD, A.STOREMGTNM
+				ORDER BY SUBSTR(C.TRANDATE, 1, 4), SUM(C.CHARGE-C.COMMISSION) DESC
+		) T
+		WHERE 1=1
+		AND ROWNUM = 1
+ 	</select>
  	
  <!-- 
 4.	분당점과 판교점을 통폐합하여 판교점으로 관리점 이관을 하였습니다. 지점명을 입력하면 해당지점의 거래금액 합계를 출력하는 API 개발( 취소여부가 ‘Y’ 거래는 취소된 거래임,)
