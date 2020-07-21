@@ -77,5 +77,5 @@ CREATE TABLE tb_storeMgt /* 데이터_관리점정보 */<br>
 # 추후 과제
 - MAVEN을 GRADLE로 바꾸는 작업
 - 기존 myBatis와 함께 jpa 기법 활용하여 db 접근 방법 개선
+- 프론트엔드 프레임워크 등을 붙여서 작업
 등
-- 프론트엔드 프레임워크 등을 붙여서 작
